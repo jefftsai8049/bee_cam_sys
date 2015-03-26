@@ -12,7 +12,7 @@ cam_cap::cam_cap(const std::string &name, QObject *parent) :
     this->cap_end = false;
     //load calibration model file
     cc = new camera_calibration;
-    calibrationLoaded = 1;
+    calibrationLoaded = 0;
     /*calibrationLoaded = */cc->loadYMLFile("cam_init.yml");
 
 }
