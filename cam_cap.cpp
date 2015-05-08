@@ -1,19 +1,25 @@
 #include "cam_cap.h"
 
 
-cam_cap::cam_cap(const std::string &name, QObject *parent) :
+cam_cap::cam_cap(const std::vector<int> pos, QObject *parent) :
     QThread(parent)
 {
     imgProcess = new img_process;
+
+
     //setting capture parameter
-    this->cap_pos = 0;
-    this->cap_name = name;
-    this->cap_status = false;
-    this->cap_end = false;
+    for(int i=0;i<pos.size();i++)
+    {
+        this->camPos[i] = pos[i];
+    }
+
+
+    this->capStatus = false;
+    this->capEnd = false;
     //load calibration model file
     cc = new camera_calibration;
     calibrationLoaded = 0;
-    /*calibrationLoaded = */cc->loadYMLFile("cam_init.yml");
+    cc->loadYMLFile("cam_init.yml");
 
 }
 
@@ -27,45 +33,64 @@ cam_cap::~cam_cap()
 
 void cam_cap::run()
 {
+
+    capL = new cv::VideoCapture(this->camPos[0]);
+    capM = new cv::VideoCapture(this->camPos[1]);
+    capR = new cv::VideoCapture(this->camPos[2]);
+
+    capFrame.resize(3);
+
     //read capture img
-    cap = new cv::VideoCapture(this->cap_pos);
-    this->cap_status = true;
-    while(cap->isOpened() && this->cap_status)
+    this->capStatus = true;
+
+    while(capL->isOpened() && capM->isOpened() && capR->isOpened() && this->capStatus)
     {
-        cap->read(this->cap_frame);
-        cap_frame = imgProcess->rotate(cap_frame);
-        if(calibrationLoaded)
+        capL->read(this->capFrame[0]);
+        capM->read(this->capFrame[1]);
+        capR->read(this->capFrame[2]);
+
+        for(int i=0;i<this->capFrame.size();i++)
         {
-            cv::Mat undistorted;
-            cc->undistorted(cap_frame,undistorted);
-            emit capSend(undistorted);
+            this->capFrame[i] = imgProcess->rotate(this->capFrame[i]);
+
+            emit capSend(this->capFrame);
         }
-        else
-        {
-            emit capSend(cap_frame);
-        }
+
+
+//        if(calibrationLoaded)
+//        {
+//            cv::Mat undistorted;
+//            cc->undistorted(cap_frame,undistorted);
+//            emit capSend(undistorted);
+//        }
+//        else
+//        {
+//            emit capSend(cap_frame);
+//        }
     }
-    this->cap_end = true;
-    cap->release();
+    this->capEnd = true;
+    capL->release();
+    capM->release();
+    capR->release();
 }
 //stop camera capture
 void cam_cap::capStop()
 {
-    this->cap_status = false;
+    this->capStatus = false;
 }
-//set camera position
-void cam_cap::setCapPosition(const int &pos)
-{
-    this->cap_pos = pos;
-}
+////set camera position
+//void cam_cap::setCapPosition(const int &pos)
+//{
+//    this->cap_pos = pos;
+//}
 //check camera is end or not
 bool cam_cap::isCamEnd()
 {
-    return this->cap_end;
+    return this->capEnd;
 }
 //check camera status(connectting or not)
 bool cam_cap::camStatus()
 {
-    return this->cap_status;
+    return this->capStatus;
 }
 

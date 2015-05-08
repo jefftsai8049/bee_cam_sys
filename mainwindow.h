@@ -76,9 +76,10 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    cam_cap *cam_1;
-    cam_cap *cam_2;
-    cam_cap *cam_3;
+    cam_cap *cam;
+    //    cam_cap *cam_1;
+//    cam_cap *cam_2;
+//    cam_cap *cam_3;
     img_process *imgProcess;
     camera_calibration *cc;
     panorama *pano;

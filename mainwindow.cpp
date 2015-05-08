@@ -10,14 +10,15 @@ MainWindow::MainWindow(QWidget *parent) :
     camStartStatus = 0;
     camRecord = 0;
     //initialize capture
-    cam_1 = new cam_cap("Cam 1");
-    cam_2 = new cam_cap("Cam 2");
-    cam_3 = new cam_cap("Cam 3");
+//    cam_1 = new cam_cap("Cam 1");
+//    cam_2 = new cam_cap("Cam 2");
+//    cam_3 = new cam_cap("Cam 3");
     img.resize(3);
-    qRegisterMetaType< cv::Mat >("cv::Mat");
-    connect(cam_1,SIGNAL(capSend(cv::Mat)),this,SLOT(cam_1_cap_receive(cv::Mat)));
-    connect(cam_2,SIGNAL(capSend(cv::Mat)),this,SLOT(cam_2_cap_receive(cv::Mat)));
-    connect(cam_3,SIGNAL(capSend(cv::Mat)),this,SLOT(cam_3_cap_receive(cv::Mat)));
+    cam = 0;
+//    qRegisterMetaType< std::vector<cv::Mat> >("std::vector<cv::Mat>");
+//    connect(cam_1,SIGNAL(capSend(cv::Mat)),this,SLOT(cam_1_cap_receive(cv::Mat)));
+//    connect(cam_2,SIGNAL(capSend(cv::Mat)),this,SLOT(cam_2_cap_receive(cv::Mat)));
+//    connect(cam_3,SIGNAL(capSend(cv::Mat)),this,SLOT(cam_3_cap_receive(cv::Mat)));
 
     cc = new camera_calibration;
     pano = new panorama;
@@ -46,17 +47,23 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_cam_connect_pushButton_clicked()
 {
-    if(!camStartStatus)
+    if(cam == 0)
     {
-        camStart();
-        camStartStatus = 1;
+        std::vector<int> camPos[3];
+        camPos[0] = ui->cam;
+//        cam = new cam_cap();
     }
-    if(ui->cam_1_checkBox->isChecked())
-        cam_1->start();
-    if(ui->cam_2_checkBox->isChecked())
-        cam_2->start();
-    if(ui->cam_3_checkBox->isChecked())
-        cam_3->start();
+//    if(!camStartStatus)
+//    {
+//        camStart();
+//        camStartStatus = 1;
+//    }
+//    if(ui->cam_1_checkBox->isChecked())
+//        cam_1->start();
+//    if(ui->cam_2_checkBox->isChecked())
+//        cam_2->start();
+//    if(ui->cam_3_checkBox->isChecked())
+//        cam_3->start();
 
 
 
@@ -65,15 +72,15 @@ void MainWindow::on_cam_connect_pushButton_clicked()
 
 void MainWindow::on_cam_disconnect_pushButton_clicked()
 {
-    cam_1->capStop();
-    cam_2->capStop();
-    cam_3->capStop();
+//    cam_1->capStop();
+//    cam_2->capStop();
+//    cam_3->capStop();
 }
 
 
 void MainWindow::cam_1_cap_receive(const cv::Mat &src)
 {
-
+//    cv::imshow("0",src);
     img[0] = src.clone();
     QImage temp(img[0].data,img[0].cols,img[0].rows,QImage::Format_RGB888);
     temp = temp.scaled(480,640,Qt::KeepAspectRatio,Qt::FastTransformation);
@@ -83,67 +90,69 @@ void MainWindow::cam_1_cap_receive(const cv::Mat &src)
 
 void MainWindow::cam_2_cap_receive(const cv::Mat &src)
 {
-    img[1] = src.clone();
-    QImage temp(img[1].data,img[1].cols,img[1].rows,QImage::Format_RGB888);
-    temp = temp.scaled(480,640,Qt::KeepAspectRatio,Qt::FastTransformation);
-    ui->video_2_label->setGeometry(QRect(video_2_x,video_2_y,video_width,video_height));
-    ui->video_2_label->setPixmap(QPixmap::fromImage(temp));
+//    cv::imshow("1",src);
+//    img[1] = src.clone();
+//    QImage temp(img[1].data,img[1].cols,img[1].rows,QImage::Format_RGB888);
+//    temp = temp.scaled(480,640,Qt::KeepAspectRatio,Qt::FastTransformation);
+//    ui->video_2_label->setGeometry(QRect(video_2_x,video_2_y,video_width,video_height));
+//    ui->video_2_label->setPixmap(QPixmap::fromImage(temp));
 }
 
 void MainWindow::cam_3_cap_receive(const cv::Mat &src)
 {
-    img[2] = src.clone();
-    QImage temp(img[2].data,img[2].cols,img[2].rows,QImage::Format_RGB888);
-    temp = temp.scaled(480,640,Qt::KeepAspectRatio,Qt::FastTransformation);
-    ui->video_3_label->setGeometry(QRect(video_3_x,video_3_y,video_width,video_height));
-    ui->video_3_label->setPixmap(QPixmap::fromImage(temp));
+//    cv::imshow("2",src);
+//    img[2] = src.clone();
+//    QImage temp(img[2].data,img[2].cols,img[2].rows,QImage::Format_RGB888);
+//    temp = temp.scaled(480,640,Qt::KeepAspectRatio,Qt::FastTransformation);
+//    ui->video_3_label->setGeometry(QRect(video_3_x,video_3_y,video_width,video_height));
+//    ui->video_3_label->setPixmap(QPixmap::fromImage(temp));
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    cam_1->capStop();
-    cam_2->capStop();
-    cam_3->capStop();
+//    cam_1->capStop();
+//    cam_2->capStop();
+//    cam_3->capStop();
 
-    cam_1->deleteLater();
+//    cam_1->deleteLater();
 
-    cam_2->deleteLater();
+//    cam_2->deleteLater();
 
-    cam_3->deleteLater();
+//    cam_3->deleteLater();
 
 }
 
 void MainWindow::camStart()
 {
 
-    cam_1->setCapPosition(ui->cam_1_comboBox->currentText().toInt());
-    cam_2->setCapPosition(ui->cam_2_comboBox->currentText().toInt());
-    cam_3->setCapPosition(ui->cam_3_comboBox->currentText().toInt());
+//    cam_1->setCapPosition(ui->cam_1_comboBox->currentText().toInt());
+//    cam_2->setCapPosition(ui->cam_2_comboBox->currentText().toInt());
+//    cam_3->setCapPosition(ui->cam_3_comboBox->currentText().toInt());
 
 }
 
 
 void MainWindow::on_record_pushButton_clicked()
 {
-    camRecord = 1;
-    cv::VideoWriter video("test.avi",cv::VideoWriter::fourcc('D', 'I', 'V', 'X'),12,cv::Size(1200,1600),true);
-    while(camRecord)
-    {
-        video << img[0];
-        //cv::imshow("frame",frame);
-        //cv::waitKey(50);
-        if(cv::waitKey(50) == 27)
-        {
-            break;
-        }
-    }
-    qDebug() << "release";
-    video.release();
+//    camRecord = 1;
+//    cv::VideoWriter video("test.avi",cv::VideoWriter::fourcc('D', 'I', 'V', 'X'),12,cv::Size(1200,1600),true);
+//    while(camRecord)
+//    {
+//        video << img[0];
+//        //cv::imshow("frame",frame);
+//        //cv::waitKey(50);
+//        if(cv::waitKey(50) == 27)
+//        {
+//            break;
+//        }
+//    }
+//    qDebug() << "release";
+//    video.release();
 }
 
 void MainWindow::on_stopRecord_pushButton_clicked()
 {
-    camRecord = 0;
+//    camRecord = 0;
 }
 
 void MainWindow::on_calibration_pushButton_clicked()

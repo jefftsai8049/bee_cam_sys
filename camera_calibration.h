@@ -4,6 +4,7 @@
 #include "opencv.hpp"
 
 #include "QDebug"
+#include "QTime"
 
 class camera_calibration
 {

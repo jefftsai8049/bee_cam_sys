@@ -25,6 +25,8 @@ HEADERS  += mainwindow.h \
     camera_calibration.h \
     panorama.h
 
+FORMS    += mainwindow.ui
+
 INCLUDEPATH += C:\\opencv300b_x64_extra_vc2013_cuda70\\include \
                 C:\\opencv300b_x64_extra_vc2013_cuda70\\include\\opencv \
                 C:\\opencv300b_x64_extra_vc2013_cuda70\\include\\opencv2 \
@@ -126,4 +128,4 @@ LIBS += C:\\opencv300b_x64_extra_vc2013_cuda70\\lib\\opencv_bgsegm300d.lib \
         C:\\opencv300b_x64_extra_vc2013_cuda70\\lib\\opencv_xobjdetect300.lib \
         C:\\opencv300b_x64_extra_vc2013_cuda70\\lib\\opencv_xphoto300.lib \
 
-FORMS    += mainwindow.ui
+

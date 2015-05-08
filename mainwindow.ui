@@ -87,7 +87,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="page">
      <property name="geometry">
@@ -366,134 +366,50 @@
      <attribute name="label">
       <string>Setting</string>
      </attribute>
-     <widget class="QComboBox" name="cam_3_comboBox">
+     <widget class="QSpinBox" name="cam_pos_L_spinBox">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>210</y>
-        <width>101</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>0</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>2</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QCheckBox" name="cam_2_checkBox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>90</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Camera #2</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="cam_3_checkBox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>170</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Camera #3</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="cam_1_comboBox">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
+        <x>20</x>
         <y>40</y>
-        <width>101</width>
-        <height>31</height>
+        <width>91</width>
+        <height>41</height>
        </rect>
       </property>
-      <item>
-       <property name="text">
-        <string>1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>0</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>2</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QCheckBox" name="cam_1_checkBox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>141</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Camera #1</string>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>16</width>
-        <height>16</height>
-       </size>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
+      <property name="maximum">
+       <number>2</number>
       </property>
      </widget>
-     <widget class="QComboBox" name="cam_2_comboBox">
+     <widget class="QSpinBox" name="cam_pos_M_spinBox">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>130</y>
-        <width>101</width>
-        <height>31</height>
+        <x>20</x>
+        <y>100</y>
+        <width>91</width>
+        <height>41</height>
        </rect>
       </property>
-      <item>
-       <property name="text">
-        <string>2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>0</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>1</string>
-       </property>
-      </item>
+      <property name="maximum">
+       <number>2</number>
+      </property>
+      <property name="value">
+       <number>1</number>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="cam_pos_R_spinBox">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>150</y>
+        <width>91</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>2</number>
+      </property>
+      <property name="value">
+       <number>2</number>
+      </property>
      </widget>
     </widget>
    </widget>

@@ -12,26 +12,28 @@ class cam_cap : public QThread
 {
     Q_OBJECT
 public:
-    explicit cam_cap(const std::string &name,QObject *parent = 0);
+    explicit cam_cap(const std::vector<int> pos, QObject *parent = 0);
     ~cam_cap();
     void capStop();
-    void setCapPosition(const int &pos);
+//    void setCapPosition(const int &pos);
     bool isCamEnd();
     bool camStatus();
 signals:
-    void capSend(const cv::Mat &src);
+    void capSend(const std::vector<cv::Mat> &src);
 public slots:
 
 private:
-    cv::VideoCapture *cap;
+    cv::VideoCapture *capL;
+    cv::VideoCapture *capM;
+    cv::VideoCapture *capR;
     img_process *imgProcess;
     camera_calibration *cc;
 
-    std::string cap_name;
-    int cap_pos;
-    cv::Mat cap_frame;
-    bool cap_status;
-    bool cap_end;
+//    std::string cap_name;
+    std::vector<int> camPos;
+    std::vector<cv::Mat> capFrame;
+    bool capStatus;
+    bool capEnd;
 
     bool calibrationLoaded;
 
